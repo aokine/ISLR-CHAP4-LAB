@@ -1,0 +1,41 @@
+---
+title: "Classification Methods"
+author: "Your Name"
+date: "Current Date"
+#bibliography: PackagesUsedRegression.bib
+output: 
+  bookdown::html_document2: 
+    highlight: textmate
+    theme: yeti
+---
+
+
+
+
+# The Stock Market Data
+
+
+We will begin by examining some numerical and graphical summaries of the `Smarket` data, which is part of the `ISLR2` library. This data set consists of percentage returns for the S&P 500 stock index over 1, 250 days, from the beginning of 2001 until the end of 2005. For each date, we have recorded the percentage returns for each of the five previous trading days, `Lag1` through `Lag5`. We have also recorded `Volume` (the number of shares traded on the previous day, in billions), `Today` (the percentage return on the date in question) and `Direction` (whether the market was `Up` or `Down` on this date). Our goal is to predict Direction (a qualitative response) using the other features.
+
+
+```{r}
+library(ISLR2)
+names(Smarket)
+dim(Smarket)
+summary(Smarket)
+pairs(Smarket)
+```
+
+
+The `cor()` function produces a matrix that contains all of the pairwise correlations among the predictors in a data set. The first command below gives an error message because the `Direction` variable is qualitative.
+
+```{r, eval=FALSE}
+cor(Smarket)
+#Error in cor(Smarket) : ‘x’ must be numeric
+```
+
+```{r}
+cor(Smarket[, -9])
+```
+
+
